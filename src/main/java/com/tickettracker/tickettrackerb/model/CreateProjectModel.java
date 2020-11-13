@@ -1,12 +1,8 @@
 package com.tickettracker.tickettrackerb.model;
 
-import java.util.List;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.tickettracker.tickettrackerb.entity.Ticket;
 
 import lombok.Data;
 

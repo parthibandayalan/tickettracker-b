@@ -24,12 +24,14 @@ public class ProjectService {
 
 	@Autowired	
 	ProjectJpaRepository projectRepository;
+	@Autowired
+	ProjectMapper projectMapper;
 
 	public List<ProjectDTO> findAll() {
 //		User user = ticketRepository.findAll().get(0);
 //		log.info("User Service : " + user.toString());
 		List<Project> projects = projectRepository.findAll();
-		List<ProjectDTO> listProjectDTO = ProjectMapper.MAPPER.listOfProjectToDTO(projects);
+		List<ProjectDTO> listProjectDTO = projectMapper.listOfProjectToDTO(projects);
 		return listProjectDTO;
 	}
 
@@ -54,7 +56,7 @@ public class ProjectService {
 		if(projectRepository.findById(id).isPresent()) {
 			Project foundProject = projectRepository.findById(id).get();
 			log.info("Project Service : " + foundProject.toString());
-			ProjectDTO toDTO = ProjectMapper.MAPPER.projectWithTicketsNoProjects(foundProject);
+			ProjectDTO toDTO = projectMapper.projectWithTicketsNoProjects(foundProject);
 			return ResponseEntity.ok().body(toDTO);
 		} else {
 			return ResponseEntity.badRequest().body("Cannot find the project specified");

@@ -12,22 +12,21 @@ import org.mapstruct.factory.Mappers;
 import com.tickettracker.tickettrackerb.dto.TicketDTO;
 import com.tickettracker.tickettrackerb.entity.Ticket;
 
-@Mapper(uses = {ProjectMapper.class})
+@Mapper(componentModel="spring",uses = {ProjectMapper.class})
 public interface TicketMapper {
     
-	TicketMapper MAPPER = Mappers.getMapper( TicketMapper.class );    
-    
-    @Named("ListOfTicketsIgnoreProjects")    
-    @IterableMapping(qualifiedByName = "TicketIgnoreProject")
+	//TicketMapper MAPPER = Mappers.getMapper( TicketMapper.class );
+	
+	@Named("ListOfTicketsIgnoreProjects")    
+    @IterableMapping( qualifiedByName = "TicketIgnoreProject")
     List<TicketDTO> listOfTicketToDTO(List<Ticket> tickets);
     
     @Named("TicketIgnoreProject")
     @Mappings({@Mapping(target = "project", ignore = true)})
-    TicketDTO ticketToDTOIgnoreProject(Ticket ticket);
+    TicketDTO toDTOIgnoreProject(Ticket ticket);
     
-//    @Mappings(
-//    		{@Mapping(target = "project", qualifiedByName = "ProjectWithTicketsNoProjects")}
-//    )
-//    TicketDTO ticketToDTO(Ticket ticket);
+    @Mappings({@Mapping(target = "project", qualifiedByName = "ProjectWithNoTickets")})
+    TicketDTO toDTOWithProject(Ticket ticket);    
+
     
 }

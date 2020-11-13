@@ -10,14 +10,12 @@ import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
 import com.tickettracker.tickettrackerb.dto.ProjectDTO;
-import com.tickettracker.tickettrackerb.dto.TicketDTO;
 import com.tickettracker.tickettrackerb.entity.Project;
-import com.tickettracker.tickettrackerb.entity.Ticket;
 
-@Mapper(uses = {TicketMapper.class})
+@Mapper(componentModel="spring",uses = {TicketMapper.class})
 public interface ProjectMapper {
 
-	ProjectMapper MAPPER = Mappers.getMapper(ProjectMapper.class);
+	//ProjectMapper MAPPER = Mappers.getMapper(ProjectMapper.class);
 	
 	@Named("ProjectWithTicketsNoProjects")
     @Mappings(
@@ -28,5 +26,10 @@ public interface ProjectMapper {
 	@Named("ListOfProjectWithTicketsNoProjects")    
     @IterableMapping(qualifiedByName = "ProjectWithTicketsNoProjects")
     List<ProjectDTO> listOfProjectToDTO(List<Project> projects);
+	
+	@Named("ProjectWithNoTickets")	
+    @Mappings(
+    		{@Mapping(target = "tickets",ignore=true)}    		)
+	ProjectDTO toDTOIgnoreTickets(Project project);
 	
 }

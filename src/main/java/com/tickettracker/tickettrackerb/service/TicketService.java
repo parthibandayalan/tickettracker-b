@@ -1,6 +1,5 @@
 package com.tickettracker.tickettrackerb.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -30,14 +29,14 @@ public class TicketService {
 	UserJpaRepository userRepository;
 	@Autowired
 	ProjectJpaRepository projectRepository;
-//	@Autowired
-//	TicketMapper ticketMapper;
+	@Autowired
+	TicketMapper ticketMapper;
 
 	public List<TicketDTO> findAll() {
 //		User user = ticketRepository.findAll().get(0);
 //		log.info("User Service : " + user.toString());
 		List<Ticket> tickets = ticketRepository.findAll();
-		List<TicketDTO> listTicketDTO = TicketMapper.MAPPER.listOfTicketToDTO(tickets);
+		List<TicketDTO> listTicketDTO = ticketMapper.listOfTicketToDTO(tickets);
 
 //		for (Ticket t : ticketRepository.findAll()) {
 //			listTicketDto.add(TicketMapper.INSTANCE.toDto(t));
@@ -55,7 +54,7 @@ public class TicketService {
 			//log.info("Ticket Service : " + foundTicket.toString());
 			//TicketDTO tDto =
 			Ticket foundTicket = ticketRepository.findById(id).get();
-			return ResponseEntity.ok(TicketMapper.MAPPER.ticketToDTOIgnoreProject(foundTicket));			
+			return ResponseEntity.ok(ticketMapper.toDTOWithProject(foundTicket));			
 		}
 
 	}
