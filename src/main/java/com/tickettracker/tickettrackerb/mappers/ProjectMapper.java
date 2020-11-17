@@ -7,20 +7,20 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
-import org.mapstruct.factory.Mappers;
 
 import com.tickettracker.tickettrackerb.dto.ProjectDTO;
 import com.tickettracker.tickettrackerb.entity.Project;
 
-@Mapper(componentModel="spring",uses = {TicketMapper.class})
+@Mapper(componentModel="spring",uses = {TicketMapper.class,UserMapper.class})
 public interface ProjectMapper {
 
 	//ProjectMapper MAPPER = Mappers.getMapper(ProjectMapper.class);
 	
 	@Named("ProjectWithTicketsNoProjects")
-    @Mappings(
-    		{@Mapping(target = "tickets", qualifiedByName = "ListOfTicketsIgnoreProjects")}
-    )
+    @Mappings({
+    		@Mapping(target = "projectManager", qualifiedByName = "UserDetails"),
+    		@Mapping(target = "tickets", qualifiedByName = "ListOfTicketsIgnoreProjects")    		
+    })
 	ProjectDTO projectWithTicketsNoProjects(Project project);
 	
 	@Named("ListOfProjectWithTicketsNoProjects")    

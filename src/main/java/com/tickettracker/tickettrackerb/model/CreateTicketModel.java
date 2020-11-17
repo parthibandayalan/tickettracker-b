@@ -31,14 +31,17 @@ public class CreateTicketModel {
 	@ValidateEnum(targetClassType = Severity.class, message = "Available severity levels are Low,Medium,High")
 	private String severity;
 
+	
+	/*No Need for status when creating the  ticket. It will be assigned as new
 	@NotNull(message = "Status cannot be null")
 	@ValidateEnum(targetClassType = Status.class, message = "Available status levels are New, Assigned, Open, Investigation, Resolved, Closed")
-	private String status;
+	private String status;*/
 	
-	private User assignedUser;
+	//private String assignedUser;
+	@NotNull(message = "Need valid Username")
+	private String createdUser;
 	
-	private User createdUser;
-	
+	@NotNull(message = "Project Id cannot be null")
 	private String projectId;
 
 }

@@ -1,6 +1,7 @@
 package com.tickettracker.tickettrackerb.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -13,12 +14,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tickettracker.tickettrackerb.dto.TicketDTO;
-import com.tickettracker.tickettrackerb.entity.Ticket;
 import com.tickettracker.tickettrackerb.model.CreateTicketModel;
 import com.tickettracker.tickettrackerb.service.TicketService;
 
@@ -43,10 +43,17 @@ public class TicketController {
 		return ticketService.findTicketById(id);
 	}
 
-	@PostMapping("/ticket")
+	@PostMapping("/ticket/create")
 	ResponseEntity<String> addTicket(@RequestBody @Valid CreateTicketModel createModel) throws Exception {
 		return ticketService.createTicket(createModel);
-
+	}
+	
+	@PutMapping("/update/ticket")
+	ResponseEntity<String> updateTicket(@RequestBody Map<String,Object> payload){
+		String column = payload.get("column").toString();
+		String value = payload.get("value").toString();
+		String id = payload.get("id").toString();
+		return ticketService.updateTicket(column, value, id);
 	}
 
 	@DeleteMapping("/ticket/delete/{id}")

@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import lombok.Data;
 
 @Entity
@@ -24,8 +22,7 @@ public class Ticket {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
 
 	private String title;
@@ -40,15 +37,12 @@ public class Ticket {
 	@Column(columnDefinition = "smallint")
 	private Status status;
 
-	// @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User createdUser;
 
-	// @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User assignedUser;
 
-	// @JsonIdentityReference(alwaysAsId = true)
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Project project;
 

@@ -12,21 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.PastOrPresent;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
-//@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+
 @Entity
 @Table(name = "t_user")
 @Data
 public class User implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonProperty("id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
 
 	@Enumerated
@@ -41,6 +36,7 @@ public class User implements Serializable {
 	@PastOrPresent
 	private LocalDate createdOn;
 
+	@Column(columnDefinition = "boolean default false")
 	private Boolean approved;
 
 }

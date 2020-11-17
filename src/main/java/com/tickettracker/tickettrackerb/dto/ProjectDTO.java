@@ -11,5 +11,6 @@ public class ProjectDTO {
 	private String id;
 	private String projectName;
 	private String projectDescription;
+	private UserDTO projectManager;
 	private List<TicketDTO> tickets;
 }

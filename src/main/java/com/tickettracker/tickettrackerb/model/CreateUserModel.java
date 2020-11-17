@@ -1,5 +1,6 @@
 package com.tickettracker.tickettrackerb.model;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -30,9 +31,6 @@ public class CreateUserModel {
 	@NotBlank(message = "Password cannot be blank")
 	@NotNull(message = "Passwod cannot be null")	
 	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",message = "Password needs to have atleast one lower case alphabet, one upper case alphabet, one number and one special character")	
-	private String password;
-
-	@NotNull
-	private Boolean approved;
+	private String password;	
 
 }

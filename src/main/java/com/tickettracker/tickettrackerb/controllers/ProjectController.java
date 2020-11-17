@@ -39,7 +39,7 @@ public class ProjectController {
 		return projectService.findProjectById(id);
 	}
 
-	@PostMapping("/project")
+	@PostMapping("/project/create")
 	ResponseEntity<String> addProject(@RequestBody @Valid CreateProjectModel createModel) throws Exception {
 
 		return projectService.createProject(createModel);
