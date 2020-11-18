@@ -19,7 +19,8 @@ public interface ProjectMapper {
 	@Named("ProjectWithTicketsNoProjects")
     @Mappings({
     		@Mapping(target = "projectManager", qualifiedByName = "UserDetails"),
-    		@Mapping(target = "tickets", qualifiedByName = "ListOfTicketsIgnoreProjects")    		
+    		@Mapping(target = "tickets", qualifiedByName = "ListOfTicketsIgnoreProjects"),
+    		@Mapping(target = "contributors", qualifiedByName = "ListofUserDetails")
     })
 	ProjectDTO projectWithTicketsNoProjects(Project project);
 	

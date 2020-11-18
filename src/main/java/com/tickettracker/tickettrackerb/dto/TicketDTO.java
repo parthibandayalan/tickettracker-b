@@ -17,8 +17,8 @@ public class TicketDTO {
 	private String description;
 	private Severity severity;
 	private Status status;
-	//private UserDTO createdUser;
-	//private User assignedUser;
+	private UserDTO createdUser;
+	private UserDTO assignedUser;
 	private ProjectDTO project;
 
 }

@@ -14,6 +14,7 @@ import com.tickettracker.tickettrackerb.entity.User;
 @Mapper(componentModel="spring",uses = {ProjectMapper.class})
 public interface UserMapper {
     
+	@Named("ListofUserDetails")
 	@IterableMapping( qualifiedByName = "UserDetails")
 	List<UserDTO> listOfUserEntitytoUserDTO(List<User> userList);
 	

@@ -131,7 +131,7 @@ public class TicketService {
 				update.set(attribute, Severity.valueOf(value));
 				break;
 			default:
-				update.set(attribute, Status.valueOf(value));
+				update.set(attribute, value);
 		}
 				
 		update.where(cb.equal(e.get("id"), Id ));

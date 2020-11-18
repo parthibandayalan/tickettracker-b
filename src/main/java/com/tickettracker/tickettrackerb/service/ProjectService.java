@@ -57,7 +57,7 @@ public class ProjectService {
 		log.info("User Service : " + receivedModel.toString());
 		
 		
-		if(userRepository.findByUsername(receivedModel.getProjectManager()).isPresent() && userRepository.findByUsername(receivedModel.getProjectManager()).get().getRole().equals(Roles.MANAGER)) {
+		if(userRepository.findByUsername(receivedModel.getProjectManager()).isPresent() && userRepository.findByUsername(receivedModel.getProjectManager()).get().getRole().equals(Roles.Manager)) {
 			project.setProjectManager(userRepository.findByUsername(receivedModel.getProjectManager()).get());
 			project.setProjectDescription(receivedModel.getProjectDescription());
 			project.setProjectName(receivedModel.getProjectName());
