@@ -38,6 +38,12 @@ public class ProjectController {
 	ResponseEntity<Object> getProjectById(@PathVariable String id) {
 		return projectService.findProjectById(id);
 	}
+	
+	//return project where the user is a project manager
+	@GetMapping("/project/user/{id}")
+	ResponseEntity<Object> getProjectByUserId(@PathVariable String id) {
+		return projectService.findProjectsByUserId(id);
+	}
 
 	@PostMapping("/project/create")
 	ResponseEntity<String> addProject(@RequestBody @Valid CreateProjectModel createModel) throws Exception {

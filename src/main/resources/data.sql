@@ -1,7 +1,7 @@
-insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('1','username1','2017-11-09','password1P@45','false','0');
-insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('2','username2','2018-11-09','password2P$56','false','2');
-insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('3','username3','2019-11-09','password3H&345','false','1');
-insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('4','username4','2017-1-09','password1P@45','false','1');
+insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('1','username1','2017-11-09','password1P@45','true','0');
+insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('2','username2','2018-11-09','password2P$56','true','2');
+insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('3','username3','2019-11-09','password3H&345','true','0');
+insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('4','username4','2017-1-09','password1P@45','true','1');
 insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('5','username5','2015-1-09','password1P@45','false','1');
 insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('6','username6','2018-10-09','password2P$56','false','2');
 insert into T_USER (ID,USERNAME,CREATED_ON,PASSWORD,APPROVED,ROLE) values ('7','username7','2019-5-09','password3H&345','false','0');

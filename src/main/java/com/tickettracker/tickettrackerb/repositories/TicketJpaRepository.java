@@ -13,5 +13,6 @@ public interface TicketJpaRepository extends JpaRepository<Ticket, Long> {
 //	Optional<User> findById(Long id);
 //	boolean existsByUsername(String username);
 	List<Ticket> findByCreatedUser_Id(Long Id);
-	List<Ticket> findByAssignedUser_Id(Long Id);	
+	List<Ticket> findByAssignedUser_Id(Long Id);
+	
 }

@@ -62,6 +62,7 @@ public class UserController {
 		//List<Integer> userIds = Integer.parseInt(payload.get("users"));
 		return userService.approveUsers(userIds);
 	}
+	
 
 	@PostMapping("/user/create")
 	ResponseEntity<String> addUser(@RequestBody @Valid CreateUserModel createUserModel) throws Exception {

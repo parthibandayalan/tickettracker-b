@@ -42,6 +42,20 @@ public class TicketController {
 		logger.info("Check Point for Debug");
 		return ticketService.findTicketById(id);
 	}
+	
+	@GetMapping("ticket/contributor/{id}")
+	ResponseEntity<Object> getTicketAsContributor(@PathVariable Long id){
+//		logger.info(payload.toString());
+//		Long id = Long.parseLong(payload.get("id").toString());
+		return ResponseEntity.ok(ticketService.findTicketAsContributor(id)); 
+	}
+	
+	@GetMapping("ticket/creator/{id}")
+	ResponseEntity<Object> getTicketAsCreator(@PathVariable Long id){
+//		logger.info(payload.toString());
+//		Long id = Long.parseLong(payload.get("id").toString());
+		return ResponseEntity.ok(ticketService.findTicketAsCreator(id)); 
+	}
 
 	@PostMapping("/ticket/create")
 	ResponseEntity<String> addTicket(@RequestBody @Valid CreateTicketModel createModel) throws Exception {
@@ -50,6 +64,7 @@ public class TicketController {
 	
 	@PutMapping("/update/ticket")
 	ResponseEntity<String> updateTicket(@RequestBody Map<String,Object> payload){
+		logger.info(payload.toString());
 		String column = payload.get("column").toString();
 		String value = payload.get("value").toString();
 		String id = payload.get("id").toString();

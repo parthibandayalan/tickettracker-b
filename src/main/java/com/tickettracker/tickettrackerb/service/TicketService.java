@@ -1,6 +1,7 @@
 package com.tickettracker.tickettrackerb.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -19,6 +20,7 @@ import com.tickettracker.tickettrackerb.entity.Roles;
 import com.tickettracker.tickettrackerb.entity.Severity;
 import com.tickettracker.tickettrackerb.entity.Status;
 import com.tickettracker.tickettrackerb.entity.Ticket;
+import com.tickettracker.tickettrackerb.entity.User;
 import com.tickettracker.tickettrackerb.mappers.TicketMapper;
 import com.tickettracker.tickettrackerb.model.CreateTicketModel;
 import com.tickettracker.tickettrackerb.repositories.ProjectJpaRepository;
@@ -40,6 +42,18 @@ public class TicketService {
 	TicketMapper ticketMapper;
 	@Autowired
     private EntityManager em;
+	
+	public List<TicketDTO> findTicketAsContributor(Long id){		
+		List<Ticket> tickets = ticketRepository.findByAssignedUser_Id(id);
+		List<TicketDTO> listTicketDTO = ticketMapper.listOfTicketToDTO(tickets);
+		return listTicketDTO;
+	}
+	
+	public List<TicketDTO> findTicketAsCreator(Long id){		
+		List<Ticket> tickets = ticketRepository.findByCreatedUser_Id(id);
+		List<TicketDTO> listTicketDTO = ticketMapper.listOfTicketToDTO(tickets);
+		return listTicketDTO;
+	}
 
 	public List<TicketDTO> findAll() {
 //		User user = ticketRepository.findAll().get(0);
@@ -54,7 +68,7 @@ public class TicketService {
 
 		return listTicketDTO;
 	}
-
+	
 	public ResponseEntity<Object> findTicketById(Long id) {
 		
 
@@ -71,8 +85,6 @@ public class TicketService {
 	}
 
 	public ResponseEntity<String> createTicket(CreateTicketModel receivedTicketModel) {
-
-		
 		
 		if(userRepository.existsByUsername(receivedTicketModel.getCreatedUser()) ) {
 			if(projectRepository.existsById(receivedTicketModel.getProjectId())) {
@@ -129,6 +141,14 @@ public class TicketService {
 				break;
 			case "severity":
 				update.set(attribute, Severity.valueOf(value));
+				break;				
+			case "assignedUser":
+				log.info("caught assigned user");				
+				if(userRepository.existsById(Long.parseLong(value))) {
+					Optional<User> user = userRepository.findById(Long.parseLong(value));
+					log.info("caught assigned user"+user.get());
+					update.set("assignedUser", user.get());
+				}
 				break;
 			default:
 				update.set(attribute, value);
