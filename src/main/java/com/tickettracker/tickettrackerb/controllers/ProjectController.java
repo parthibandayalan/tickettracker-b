@@ -1,6 +1,7 @@
 package com.tickettracker.tickettrackerb.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tickettracker.tickettrackerb.dto.ProjectDTO;
+import com.tickettracker.tickettrackerb.entity.User;
 import com.tickettracker.tickettrackerb.model.CreateProjectModel;
 import com.tickettracker.tickettrackerb.service.ProjectService;
+import com.tickettracker.tickettrackerb.service.UserService;
 
 @RestController
 @CrossOrigin(origins="http://localhost:3000")
@@ -27,6 +30,8 @@ public class ProjectController {
 
 	@Autowired
 	ProjectService projectService;
+	@Autowired
+	UserService userService;
 
 	@GetMapping("/projects")
 	List<ProjectDTO> getProjects() {
@@ -39,9 +44,24 @@ public class ProjectController {
 		return projectService.findProjectById(id);
 	}
 	
+	//return projects managed by a 
+	@GetMapping("/project/manager/{username}")
+	ResponseEntity<Object> getProjectByUsername(@PathVariable String username){ 
+		
+		Optional<User> user = userService.findByUsername(username);
+		
+		if(user.isPresent()) {
+			return projectService.findProjectsByUserId(user.get().getId().toString());
+		} else {
+			return ResponseEntity.unprocessableEntity().body("Username doesnt exist");
+		}
+		
+	}
+	
 	//return project where the user is a project manager
 	@GetMapping("/project/user/{id}")
 	ResponseEntity<Object> getProjectByUserId(@PathVariable String id) {
+		logger.info("Received Username : " + id.toString());
 		return projectService.findProjectsByUserId(id);
 	}
 

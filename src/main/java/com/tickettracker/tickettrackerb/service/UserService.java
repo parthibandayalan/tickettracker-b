@@ -2,6 +2,7 @@ package com.tickettracker.tickettrackerb.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -146,5 +147,9 @@ public class UserService {
         	
         } else return ResponseEntity.badRequest().body("Cannot find the user specified");
     }
+	
+	public Optional<User> findByUsername(String username) {
+		return userRepository.findByUsername(username);
+	}
 
 }

@@ -99,8 +99,6 @@ public class ProjectService {
 		
 		if(userRepository.findById(Long.parseLong(id)).isPresent()) {
 			
-			
-			
 			CriteriaBuilder cb = this.em.getCriteriaBuilder();
 			AbstractQuery<Project> cq1=cb.createQuery(Project.class); 
 			Root<Project> stud1=cq1.from(Project.class); 
