@@ -11,7 +11,8 @@ public class UserDTO {
 
 	private Long id;
 	private Roles role;
-	private String username;	
+	private String username;
+	private String fullname;
 	private Boolean approved;
 	private LocalDate createdOn;
 

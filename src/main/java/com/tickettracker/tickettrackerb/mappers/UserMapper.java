@@ -11,7 +11,7 @@ import org.mapstruct.Named;
 import com.tickettracker.tickettrackerb.dto.UserDTO;
 import com.tickettracker.tickettrackerb.entity.User;
 
-@Mapper(componentModel="spring",uses = {ProjectMapper.class})
+@Mapper(componentModel="spring",uses = {ProjectMapper.class,TicketMapper.class})
 public interface UserMapper {
     
 	@Named("ListofUserDetails")
@@ -19,7 +19,7 @@ public interface UserMapper {
 	List<UserDTO> listOfUserEntitytoUserDTO(List<User> userList);
 	
 	@Named("UserDetails")    
-    UserDTO toUserDTO(User projectManager);
+    UserDTO toUserDTO(User user);
 	
 	/*
 	

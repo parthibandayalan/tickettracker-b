@@ -99,6 +99,15 @@ public class TicketController {
 		String id = payload.get("id").toString();
 		return ticketService.updateTicket(column, value, id);
 	}
+	
+	@PutMapping("/ticket/addcomment")
+	ResponseEntity<String> addComment(@RequestBody Map<String,Object> payload){
+		logger.info(payload.toString());
+		String author = payload.get("author").toString();
+		String message = payload.get("message").toString();
+		String ticketId = payload.get("ticketId").toString();
+		return ticketService.addComment(ticketId,author,message);
+	}
 
 	@DeleteMapping("/ticket/delete/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {

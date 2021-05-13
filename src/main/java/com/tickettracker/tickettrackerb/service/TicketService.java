@@ -1,5 +1,7 @@
 package com.tickettracker.tickettrackerb.service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.tickettracker.tickettrackerb.dto.TicketDTO;
+import com.tickettracker.tickettrackerb.entity.Comment;
 import com.tickettracker.tickettrackerb.entity.Roles;
 import com.tickettracker.tickettrackerb.entity.Severity;
 import com.tickettracker.tickettrackerb.entity.Status;
@@ -158,6 +161,30 @@ public class TicketService {
 		this.em.createQuery(update).executeUpdate();
 		
 		return ResponseEntity.ok("Ticket Updated Successfully");
+	} 
+	
+	public ResponseEntity<String> addComment(String ticketId,String author,String message){
+		if(ticketRepository.findById(Long.parseLong(ticketId)).isPresent()) {
+			Ticket ticket = ticketRepository.findById(Long.parseLong(ticketId)).get();
+			if(userRepository.findByUsername(author).isPresent()) {		
+				User user = userRepository.findByUsername(author).get();
+				Comment comment = new Comment();
+				comment.setCreatedOn(LocalDate.now());
+				comment.setAuthor(user);
+				comment.setMessage(message);
+				List<Comment> comments =  ticket.getComments();
+				comments.add(comment);
+				ticket.setComments(comments);
+				ticketRepository.save(ticket);
+			} else {
+				return ResponseEntity.unprocessableEntity().body("User not found");
+			}
+		} else {
+			return ResponseEntity.unprocessableEntity().body("Ticket not found");
+		}
+		
+		
+		return null;
 	}
 
 	public ResponseEntity<Object> deleteTicket(Long id) {

@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
 import com.tickettracker.tickettrackerb.dto.TicketDTO;
 import com.tickettracker.tickettrackerb.entity.Ticket;
 
-@Mapper(componentModel="spring",uses = {ProjectMapper.class,UserMapper.class})
+@Mapper(componentModel="spring",uses = {ProjectMapper.class,UserMapper.class,CommentMapper.class})
 public interface TicketMapper {
     
 	//TicketMapper MAPPER = Mappers.getMapper( TicketMapper.class );
@@ -22,7 +22,10 @@ public interface TicketMapper {
     List<TicketDTO> listOfTicketToDTO(List<Ticket> tickets);
     
     @Named("TicketIgnoreProject")
-    @Mappings({@Mapping(target = "project", ignore = true)})
+    @Mappings({
+    		@Mapping(target = "project", ignore = true),
+    		@Mapping(target = "comments", qualifiedByName = "ListOfComments")
+    })
     TicketDTO toDTOIgnoreProject(Ticket ticket);
     
     @Mappings({

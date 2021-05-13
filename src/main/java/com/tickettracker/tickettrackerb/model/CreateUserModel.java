@@ -31,6 +31,12 @@ public class CreateUserModel {
 	@NotBlank(message = "Password cannot be blank")
 	@NotNull(message = "Passwod cannot be null")	
 	@Pattern(regexp = "^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",message = "Password needs to have atleast one lower case alphabet, one upper case alphabet, one number and one special character")	
-	private String password;	
+	private String password;
+	
+	@Size(min=8 , message="Full Name needs to be minimum length of 8")
+	@Size(max=20 , message="Full Name can be of a maximum length of 50")
+	@NotBlank(message = "Full Name cannot be blank")
+	@NotNull(message = "Full Name cannot be null")
+	private String fullname;
 
 }

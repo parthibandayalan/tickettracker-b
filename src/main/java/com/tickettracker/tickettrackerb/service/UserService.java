@@ -71,6 +71,7 @@ public class UserService {
 
 		if (!userRepository.existsByUsername(receivedUserModel.getUsername())) {
 			User user = new User();
+			user.setFullname(receivedUserModel.getFullname());
 			user.setUsername(receivedUserModel.getUsername());
 			user.setPassword(receivedUserModel.getPassword());
 			user.setApproved(false);

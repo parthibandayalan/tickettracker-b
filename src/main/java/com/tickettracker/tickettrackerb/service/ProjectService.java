@@ -2,6 +2,9 @@ package com.tickettracker.tickettrackerb.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -20,10 +23,13 @@ import org.springframework.stereotype.Service;
 import com.tickettracker.tickettrackerb.dto.ProjectDTO;
 import com.tickettracker.tickettrackerb.entity.Project;
 import com.tickettracker.tickettrackerb.entity.Roles;
+import com.tickettracker.tickettrackerb.entity.User;
 import com.tickettracker.tickettrackerb.mappers.ProjectMapper;
 import com.tickettracker.tickettrackerb.model.CreateProjectModel;
 import com.tickettracker.tickettrackerb.repositories.ProjectJpaRepository;
 import com.tickettracker.tickettrackerb.repositories.UserJpaRepository;
+
+
 
 @Service
 public class ProjectService {
@@ -121,5 +127,72 @@ public class ProjectService {
 			return ResponseEntity.badRequest().body("Username doesnt exist");
 		}
 	}
+	
+	
+	public ResponseEntity<String> removeContributors(String managerUsername,String projectId,List<Integer> userIds){
+		if(projectRepository.findById(projectId).isPresent()) {
+			Project project =projectRepository.findById(projectId).get();
+			log.info("Project : "+project.toString());
+			if(project.getProjectManager().getUsername().equals(managerUsername)) {
+				for(Integer id : userIds) {
+					Boolean removeSuccess = project.getContributors().removeIf(e -> e.getId().toString().equals(Long.toString(id)));
+					log.info("removal  : "+removeSuccess.toString());
+				}
+				log.info("Project with contributors removed : "+project.getContributors().toString());
+				projectRepository.save(project);
+				return ResponseEntity.ok().body("Contributors Removed");
+			} else {
+				return ResponseEntity.badRequest().body("Invalid project manager");
+			}
+		} else {
+			return ResponseEntity.badRequest().body("Project doesnt exist");
+		}
+	}
+	
+	public ResponseEntity<Object> getAvailableContributors(String managerUsername,String projectId){
+		if(projectRepository.findById(projectId).isPresent()) {
+			Project project = projectRepository.findById(projectId).get();
+			if(project.getProjectManager().getUsername().equals(managerUsername)) {				
+				List<Long> unAvailableUsers = project.getContributors().stream().map(u -> u.getId()).collect(Collectors.toList());
+				List<User> availableUsers = userRepository.findAllByIdNotInAndApprovedAndRole(unAvailableUsers, true,Roles.Contributor);
+				return ResponseEntity.ok(availableUsers);
+			} else {
+				return ResponseEntity.badRequest().body("Invalid project manager");
+			}
+		} else {
+			return ResponseEntity.badRequest().body("Project doesnt exist");
+		}				
+	}
+
+	public ResponseEntity<String> addContributors(String managerUsername, String projectId, List<Integer> userIds) {
+		// TODO Auto-generated method stub
+		
+		if(projectRepository.findById(projectId).isPresent()) {
+			Project project = projectRepository.findById(projectId).get();
+			if(project.getProjectManager().getUsername().equals(managerUsername)) {
+				List<User> contributors = project.getContributors();
+				for(Integer id : userIds) {
+					Optional<User> user = userRepository.findById(Long.valueOf(id.longValue()));
+					if(user.isPresent()) {
+						contributors.add(user.get());
+					} else {
+						return ResponseEntity.badRequest().body("Invalid Contributor Id");
+					}
+				}
+				
+				project.setContributors(contributors);
+				log.info("Contributors : " + contributors.toString());
+				projectRepository.save(project);
+				return ResponseEntity.ok("Contributors Added");
+				
+			} else {
+				return ResponseEntity.badRequest().body("Invalid project manager");
+			}
+		} else {
+			return ResponseEntity.badRequest().body("Project doesnt exist");
+		}		
+	}
+	
+	
 
 }

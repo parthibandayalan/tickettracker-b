@@ -1,6 +1,7 @@
 package com.tickettracker.tickettrackerb.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -70,6 +71,31 @@ public class ProjectController {
 
 		return projectService.createProject(createModel);
 
+	}
+	
+	@PostMapping("/project/remove/contributors")
+	ResponseEntity<String> removeContributor(@RequestBody Map<String,Object> payload){
+		logger.info("Caught request : " + payload.toString());
+		List<Integer> userIds = (List<Integer>) payload.get("users");
+		String projectId = (String) payload.get("projectId");
+		String managerUsername = (String) payload.get("manager");
+		return projectService.removeContributors(managerUsername,projectId,userIds);
+	}
+	
+	@PostMapping("/project/add/contributors")
+	ResponseEntity<String> addContributor(@RequestBody Map<String,Object> payload){
+		logger.info("Caught request : " + payload.toString());
+		List<Integer> userIds = (List<Integer>) payload.get("users");
+		String projectId = (String) payload.get("projectId");
+		String managerUsername = (String) payload.get("manager");
+		return projectService.addContributors(managerUsername,projectId,userIds);
+	}
+	
+	@PostMapping("/project/available/contributors")
+	public ResponseEntity<Object> getAvailableContributors(@RequestBody Map<String,Object> payload){
+		String projectId = (String) payload.get("projectId");
+		String managerUsername = (String) payload.get("manager");
+		return projectService.getAvailableContributors(managerUsername,projectId);
 	}
 
 }

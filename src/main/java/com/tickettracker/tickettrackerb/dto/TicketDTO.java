@@ -1,6 +1,8 @@
 package com.tickettracker.tickettrackerb.dto;
 
 
+import java.util.List;
+
 import com.tickettracker.tickettrackerb.entity.Severity;
 import com.tickettracker.tickettrackerb.entity.Status;
 
@@ -20,5 +22,6 @@ public class TicketDTO {
 	private UserDTO createdUser;
 	private UserDTO assignedUser;
 	private ProjectDTO project;
+	private List<CommentDTO> comments;
 
 }

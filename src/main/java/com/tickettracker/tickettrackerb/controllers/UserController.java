@@ -49,8 +49,9 @@ public class UserController {
 	}
 	
 	@PutMapping("/check/user")
-	ResponseEntity<String> checkUserExist(@RequestBody Map<String,Object> payload){
+	ResponseEntity<String> checkUserExist(@RequestBody Map<String,Object> payload){		
 		String username = payload.get("username").toString();
+		logger.info(" Checking Username : "+username.toString());
 		return userService.checkUserExist(username);
 	}
 	
@@ -61,7 +62,10 @@ public class UserController {
 		List<Integer> userIds = payload.get("users"); 
 		//List<Integer> userIds = Integer.parseInt(payload.get("users"));
 		return userService.approveUsers(userIds);
-	}
+	}	
+	
+	
+	//getQualifiedContributor
 	
 
 	@PostMapping("/user/create")
