@@ -3,7 +3,8 @@ import sys
 import os
 
 def main():
-    if (len(sys.argv)  6):
+    print(len(sys.argv))
+    if (len(sys.argv) != 6):
         print ('Error: Required 5 arguments.')
         # Checks for 6 because the script path is in position 0. So len is 6
         # for 5 arguments.
