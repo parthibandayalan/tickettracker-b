@@ -28,11 +28,11 @@ def main():
     os.system('ls -l target')
     os.system('pwd')
 
-    #response = client.upload_file(
-    #    Filename=local_path,
-    #    Bucket=bucket_name,
-    #    Key=aws_key
-    #)
+    response = client.upload_file(
+        Filename=local_path,
+        Bucket=bucket_name,
+        Key=aws_key
+    )
     print ('Done uploading')
 
 
