@@ -1,5 +1,6 @@
 import boto3
 import sys
+import os
 
 def main():
     if (len(sys.argv)  6):
@@ -20,11 +21,14 @@ def main():
     )
     client = session.client('s3')
 
-    response = client.upload_file(
-        Filename=local_path,
-        Bucket=bucket_name,
-        Key=aws_key
-    )
+    os.system('ls -l')
+    os.system('pwd')
+
+    #response = client.upload_file(
+    #    Filename=local_path,
+    #    Bucket=bucket_name,
+    #    Key=aws_key
+    #)
     print ('Done uploading')
 
 
