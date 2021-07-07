@@ -4,11 +4,7 @@ aws_access_key=$3
 aws_access_secret=$4
 local_path=$2
 
-# Remove any existing versions of a ZIP
-rm -rf $local_path
-
 pwd
-
 ls -a
 
 # Install required dependencies for Python script.
