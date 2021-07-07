@@ -21,7 +21,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Step 3 - Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B clean package --file pom.xml
     - name: Step 4 - List the current directory
       run: ls -a
     - name: Step 5 - What is in the target directory?
