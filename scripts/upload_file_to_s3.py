@@ -9,6 +9,8 @@ def main():
         # for 5 arguments.
         sys.exit(1)
 
+    print("Upload to S3 python script initiated")
+
     bucket_name=sys.argv[1]
     aws_key=sys.argv[2]
     aws_access_key=sys.argv[3]
