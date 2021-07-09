@@ -4,6 +4,7 @@
 name: Java CI with Maven and Upload to aws S3
 
 on:
+  workflow_dispatch
   push:
     branches: [ main ]  
 
