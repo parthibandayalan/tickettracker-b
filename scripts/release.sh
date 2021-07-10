@@ -13,7 +13,7 @@ rm -rf $local_path
 # Create a zip of the current directory.
 zip -r $local_path .ebextensions target/tickettracker-b-0.0.1-SNAPSHOT.jar
 echo "-------------ZipDone------------"
-ls -a
+ls -la
 
 # Install required dependencies for Python script.
 pip3 install boto3
