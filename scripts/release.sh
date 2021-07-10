@@ -11,8 +11,8 @@ ls -a
 rm -rf $local_path
 
 # Create a zip of the current directory.
-zip -r $local_path .ebextensions $bucket_name
-
+zip -r $local_path .ebextensions target/tickettracker-b-0.0.1-SNAPSHOT.jar
+echo "-------------ZipDone------------"
 ls -a
 
 # Install required dependencies for Python script.
