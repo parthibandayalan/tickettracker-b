@@ -4,6 +4,7 @@ aws_access_key=$3
 aws_access_secret=$4
 local_path=$5
 
+echo "Inside release.sh"
 pwd
 ls -a
 
