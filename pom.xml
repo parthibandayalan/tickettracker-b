@@ -140,7 +140,7 @@
 						<!-- other annotation processors -->
 					</annotationProcessorPaths>
 				</configuration>
-			</plugin>
+			</plugin>			
 		</plugins>
 	</build>
 </project>

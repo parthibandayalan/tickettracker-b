@@ -2,10 +2,15 @@ bucket_name=$1
 aws_key=$2
 aws_access_key=$3
 aws_access_secret=$4
-local_path=$2
+local_path=$5
 
 pwd
 ls -a
+
+rm -rf $local_path
+
+# Create a zip of the current directory.
+zip -r $local_path 
 
 # Install required dependencies for Python script.
 pip3 install boto3
