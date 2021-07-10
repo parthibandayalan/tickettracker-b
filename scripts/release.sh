@@ -10,8 +10,10 @@ ls -a
 
 rm -rf $local_path
 
+echo "web: java -jar tickettracker-b-0.0.1-SNAPSHOT.jar.jar: > Procfile
+
 # Create a zip of the current directory.
-zip -r $local_path .ebextensions target/tickettracker-b-0.0.1-SNAPSHOT.jar
+zip -r $local_path .ebextensions target/tickettracker-b-0.0.1-SNAPSHOT.jar Procfile
 echo "-------------ZipDone------------"
 ls -la
 

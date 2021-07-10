@@ -28,4 +28,4 @@ jobs:
         run: |
           ls -a target
       - name: Release to S3
-        run: bash ./scripts/release.sh ${{secrets.AWS_Bucket_Name}} "target/tickettracker-b-0.0.1-SNAPSHOT.jar" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} ttbackend.jar
+        run: bash ./scripts/release.sh ${{secrets.AWS_Bucket_Name}} "target/tickettracker-b-0.0.1-SNAPSHOT.jar" ${{secrets.AWS_Access_Key}} ${{secrets.AWS_Access_Secret}} ttbackend.zip
