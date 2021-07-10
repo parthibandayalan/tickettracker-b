@@ -10,10 +10,12 @@ ls -a
 rm -rf $local_path
 
 # Create a zip of the current directory.
-zip -r $local_path 
+zip -r $local_path .ebextensions $bucket_name
+
+ls -a
 
 # Install required dependencies for Python script.
 pip3 install boto3
 
 # Run upload script
-python3 scripts/upload_file_to_s3.py $bucket_name $aws_key $aws_access_key $aws_access_secret $local_path
+#python3 scripts/upload_file_to_s3.py $bucket_name $aws_key $aws_access_key $aws_access_secret $local_path
