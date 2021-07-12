@@ -35,6 +35,9 @@ jobs:
       - name: Step 7 - docker build java project
         run: |
           docker build . -t ttbackend.jar:1.0.0
-      - name: Step 8 - docker push
+      - name: Step 8 - docker tag projects
         run: |
-          docker push ttbackend.jar:1.0.0
+          docker tag ttbackend.jar parthibandayalan/ttbackend.jar
+      - name: Step 9 - docker push
+        run: |
+          docker push parthibandayalan/ttbackend.jar
