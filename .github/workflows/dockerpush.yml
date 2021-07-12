@@ -19,7 +19,7 @@ jobs:
           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
       - name: docker build csharp
         run: |
-          docker build . -t ttbackend.jar|1.0.0
+          docker build . -t ttbackend.jar:1.0.0
       - name: docker push
         run: |
-          docker push ttbackend.jar|1.0.0
+          docker push ttbackend.jar:1.0.0
